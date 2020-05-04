@@ -1,0 +1,54 @@
+﻿<Window x:Class="AsyncMethods.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AsyncMethods"
+        mc:Ignorable="d"
+        Title="Pobieranie szkieletu strony internetowej" Height="250" Width="500">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".4*"/>
+            <RowDefinition Height=".6*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*"/>
+            <ColumnDefinition Width=".5*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox ItemsSource="{Binding WebSitePathsList}" SelectedItem="{Binding SelectedWebsite}" x:Name="lbWebsites" Grid.Row="0" Grid.ColumnSpan="2" SelectionChanged="LbWebsites_SelectionChanged" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                   <StackPanel  Orientation="Horizontal">
+                        <TextBox Text="{Binding Url}" Width="300"/>
+                     
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,10,0,0">
+
+            <ProgressBar x:Name="downloadprogress" Width="200" Height="25"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Pobieranie" RenderTransformOrigin="0.5,0.5"/>
+                <Label x:Name="DownloadPercetns" Content="0%"/>
+            </StackPanel>
+            <Label x:Name="Completed" Visibility="Collapsed"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Ilość pobranych plików" RenderTransformOrigin="0.5,0.5"/>
+                <Label x:Name="DownloadFilesCount" Content="0"/>
+            </StackPanel>
+        </StackPanel>
+        
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+        
+            <Button Click="DownloadWeb_Click" Content="Pobierz jedną stronę"/>
+            <Button x:Name="DownloadWebs" Click="DownloadWebs_Click"  Content="Pobierz wszystkie strony"/>
+         
+        </StackPanel>
+    </Grid>
+</Window>
